@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date and Time Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #282c34;
+            color: #61dafb;
+        }
+
+        .clock-container {
+            text-align: center;
+        }
+
+        .date-time-display {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <div class="date-time-display" id="dateTime"></div>
+    </div>
+
+    <script>
+        function updateDateTime() {
+            var now = new Date();
+
+            // Date components
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1; // Months are 0-based
+            var day = now.getDate();
+            
+            // Time components
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            // Format date
+            var dateString = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+            
+            // Format time
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            var timeString = `${hours}:${minutes}:${seconds}`;
+            
+            // Combine date and time
+            var dateTimeString = `Date: ${dateString} | Time: ${timeString}`;
+
+            // Update the text of the element with id 'dateTime'
+            document.getElementById('dateTime').innerText = dateTimeString;
+        }
+
+        // Call the function every second
+        setInterval(updateDateTime, 1000);
+
+        // Initial call to display date and time immediately
+        updateDateTime();
+    </script>
+</body>
+</html>
